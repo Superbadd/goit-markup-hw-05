@@ -84,6 +84,8 @@ html {
         text-transform: uppercase;
         text-decoration: none;
         margin-right: 76px;
+
+        transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .logo:hover,
@@ -93,6 +95,7 @@ html {
 
     .accent {
     color: var(--title-color);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .accent:hover,
@@ -120,6 +123,7 @@ html {
     font-weight: 500;
     letter-spacing: 0.02em;
     text-decoration: none;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .menu {
@@ -139,6 +143,21 @@ html {
     .item > .link {
     display: flex;
     padding: 24px 0;
+    position: relative;
+    }
+
+    .item>.link::after {
+        content: '';
+        position: absolute;
+        top: 88px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        border-radius: 2px;
+    }
+
+    .item>.link.active::after {
+        background-color: var(--color-ocean);
     }
 
     .list .contacts .item + .item {
@@ -155,6 +174,7 @@ html {
     text-decoration: none;
     font-style: normal;
     list-style: none;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .contacts:hover,
@@ -265,7 +285,7 @@ html {
     }
 
     .section-title {
-        margin-top: 0;
+    margin-top: 0;
     margin-bottom: 72px;
     color: var(--title-color);
     font-weight: 700; 
@@ -331,6 +351,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .social-icons {
@@ -356,6 +377,7 @@ html {
     font-size: 16px; 
     line-height: 1.5;
     letter-spacing: 0.04em;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .button:hover,
@@ -392,6 +414,7 @@ html {
     align-items: center;
     justify-content: center;
     color: var(--mediocre-color);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .customers-ref:hover,
@@ -427,6 +450,7 @@ html {
     font-size: 16px; 
     line-height: 1.5; 
     letter-spacing: 0.04em;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .btn:hover,
@@ -458,7 +482,6 @@ html {
 
    .fourth-section {
     background-color: #F4F4FD;
-    /* margin-bottom: 120px; */
    }
 
    .card-content {
@@ -483,6 +506,7 @@ html {
     column-gap: 24px;
     row-gap: 48px;
     list-style: none;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
    }
 
    .work-title {
@@ -496,6 +520,7 @@ html {
 
    .work {
     display: block;
+    transition: box-shadow 3000ms cubic-bezier(0.4, 0, 0.2, 1);
    }
 
    .work:hover,
@@ -513,6 +538,7 @@ html {
     width: calc((100% - 48px) / 3);
     margin-left: 0;
     padding: 0;
+    position: relative;
    }
 
    .cards-element:nth-last-child(-n + 3) {
@@ -521,13 +547,51 @@ html {
 
    .cards-element:nth-child(3n) {
        margin-right: 0;
-   }
+   } 
 
    .card-inside {
     padding: 32px 16px;
     border: 1px solid #e7e9fc;
     border-top: none;
     margin-bottom: 8px;
+   }
+
+   .card-thumb {
+    outline: 2px solid red;
+    bottom: 0;
+    right: 0;
+    position: relative;
+    overflow: hidden;
+   }
+
+   .overlay {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background-color: var(--secondary-color);
+    transform: translateY(100%);
+    transition: transform 300ms ease-in;
+   }
+
+   .cards-element:hover .overlay {
+    transform: translateY(0%);
+   }
+
+   .card-inf {
+    position: absolute;
+    top: 40px;
+    left: 32px;
+    width: 296px;
+    height: 96px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F4F4FD;
+    margin: 0;
    }
 
     .work {
@@ -553,9 +617,6 @@ html {
     margin-bottom: 16px;
     max-width: 264px;
     color: #f4f4fd;
-    /* font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: 0.02em; */
    }
 
    .footer-title {
@@ -587,9 +648,44 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
    }
 
    .fsocial-ref:hover,
    .fsocial-ref:focus {
     background-color: #31d0aa;
+   }
+
+   .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.4);;
+   }
+
+   .backdrop.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+   }
+
+   .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    min-width: 408px;
+    min-height: 584px;
+    border-radius: 4px;
+    background-color: #FCFCFC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+   }
+
+   .close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
    }
